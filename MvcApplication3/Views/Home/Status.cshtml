@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Status";
+}
+
+<h2>Status</h2>
+
+@if (WebSecurity.IsAuthenticated)
+{
+    <p>there is authentificated user @WebSecurity.CurrentUserName</p>
+}
+else
+{
+    <p>there is no current user</p>
+}    
+    
+
+

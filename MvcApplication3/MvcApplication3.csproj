@@ -164,30 +164,86 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AirportController.cs" />
+    <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\IdsController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Model1.Context.cs">
+    <Compile Include="Models\Airport.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>Airport.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.cs">
+    <Compile Include="Models\Airport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Airport.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
+    <Compile Include="Models\Airport.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>Airport.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Airports.cs">
+      <DependentUpon>Airport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flight.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flight.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flight.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flight.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flight.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flight.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flights.cs">
+      <DependentUpon>Flight.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ids.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ids.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ids.cs">
+      <DependentUpon>Ids.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ids.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ids.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ids1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ids.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Users.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Users.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -248,22 +304,73 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\Flight.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Flight.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\Flight.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Flight.edmx</DependentUpon>
+      <LastGenOutput>Flight.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\Flight.edmx.diagram">
+      <DependentUpon>Flight.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\Flight.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>Flight.edmx</DependentUpon>
+      <LastGenOutput>Flight.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Airport.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Airport.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Airport.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Airport.edmx</DependentUpon>
+      <LastGenOutput>Airport.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Airport.edmx.diagram">
+      <DependentUpon>Airport.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Airport.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Airport.edmx</DependentUpon>
+      <LastGenOutput>Airport.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Ids.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ids.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Ids.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ids.edmx</DependentUpon>
+      <LastGenOutput>Ids.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Ids.edmx.diagram">
+      <DependentUpon>Ids.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Ids.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ids.edmx</DependentUpon>
+      <LastGenOutput>Ids1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Users.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Users.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Users.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Users.edmx</DependentUpon>
+      <LastGenOutput>Users.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Users.edmx.diagram">
+      <DependentUpon>Users.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Users.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Users.edmx</DependentUpon>
+      <LastGenOutput>Users1.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -319,11 +426,26 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Flight\Index.cshtml" />
+    <Content Include="Views\Flight\Details.cshtml" />
+    <Content Include="Views\Flight\Create.cshtml" />
+    <Content Include="Views\Flight\Edit.cshtml" />
+    <Content Include="Views\Flight\Delete.cshtml" />
+    <Content Include="Views\ForUsers.cshtml" />
+    <Content Include="Views\Home\ForUsersOnly.cshtml" />
+    <Content Include="Views\Airport\Index.cshtml" />
+    <Content Include="Views\Airport\Details.cshtml" />
+    <Content Include="Views\Airport\Create.cshtml" />
+    <Content Include="Views\Airport\Edit.cshtml" />
+    <Content Include="Views\Airport\Delete.cshtml" />
+    <Content Include="Views\Home\Me.cshtml" />
+    <Content Include="Views\Home\Status.cshtml" />
+    <Content Include="Views\Ids\Index.cshtml" />
+    <Content Include="Views\Ids\Details.cshtml" />
+    <Content Include="Views\Ids\Create.cshtml" />
+    <Content Include="Views\Ids\Edit.cshtml" />
+    <Content Include="Views\Ids\Delete.cshtml" />
+    <Content Include="Views\ErrorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

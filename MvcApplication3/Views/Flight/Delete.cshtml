@@ -1,0 +1,95 @@
+﻿@model MvcApplication3.Models.Flights
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Flights</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FlightID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FlightID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirplaneID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AirplaneID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AirlineID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AirlineID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FlightNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FlightNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Origin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Origin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DepartureTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DepartureTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Destination)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Destination)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ArrivalTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ArrivalTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FreeSeats)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FreeSeats)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

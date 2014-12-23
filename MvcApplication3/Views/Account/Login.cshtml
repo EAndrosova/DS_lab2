@@ -10,7 +10,8 @@
 
 <section id="loginForm">
 <h2>Use a local account to log in.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -31,18 +32,16 @@
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
+            
         </ol>
-        <input type="submit" value="Log in" />
+        @Html.Hidden("client_id", "1234")
+        @Html.Hidden("client_secret", "5678")
+            <input type="submit" value="Log in" />
     </fieldset>
     <p>
         @Html.ActionLink("Register", "Register") if you don't have an account.
     </p>
 }
-</section>
-
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
 @section Scripts {

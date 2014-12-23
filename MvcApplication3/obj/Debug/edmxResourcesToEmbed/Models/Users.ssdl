@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DS_2UserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DS_2UserModelStoreContainer">
+    <EntitySet Name="Users" EntityType="DS_2UserModel.Store.Users" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Pwd" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="ExpireTime" Type="datetime" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Token" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="RefreshToken" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+</Schema>

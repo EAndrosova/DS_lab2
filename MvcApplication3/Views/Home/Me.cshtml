@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Me";
+}
+
+<h2>Me</h2>
+
+<p>Username: @WebSecurity.CurrentUserName</p>
+<p>User Id: @WebSecurity.CurrentUserId</p>
+<p>Create Date: @WebSecurity.GetCreateDate(WebSecurity.CurrentUserName)</p>

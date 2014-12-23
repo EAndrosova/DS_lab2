@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DS_2_Ids" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DS_2Entities3" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Ids" EntityType="DS_2_Ids.Ids" />
+  </EntityContainer>
+  <EntityType Name="Ids">
+    <Key>
+      <PropertyRef Name="title" />
+      <PropertyRef Name="value" />
+    </Key>
+    <Property Name="title" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="value" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="true" />
+  </EntityType>
+</Schema>

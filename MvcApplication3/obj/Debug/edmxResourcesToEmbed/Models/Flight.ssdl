@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DS_2_FM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DS_2_FMStoreContainer">
+    <EntitySet Name="Flights" EntityType="DS_2_FM.Store.Flights" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Flights">
+    <Key>
+      <PropertyRef Name="FlightID" />
+    </Key>
+    <Property Name="FlightID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AirplaneID" Type="int" Nullable="false" />
+    <Property Name="AirlineID" Type="int" Nullable="false" />
+    <Property Name="FlightNumber" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Origin" Type="int" Nullable="false" />
+    <Property Name="DepartureTime" Type="datetime" Nullable="false" />
+    <Property Name="Destination" Type="int" Nullable="false" />
+    <Property Name="ArrivalTime" Type="datetime" Nullable="false" />
+    <Property Name="FreeSeats" Type="int" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema>

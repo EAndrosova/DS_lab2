@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DS_2_Ids.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DS_2_IdsStoreContainer">
+    <EntitySet Name="Ids" EntityType="DS_2_Ids.Store.Ids" store:Type="Tables" store:Schema="dbo" store:Name="Ids">
+      <DefiningQuery>SELECT 
+      [Ids].[title] AS [title], 
+      [Ids].[value] AS [value]
+      FROM [dbo].[Ids] AS [Ids]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'DS_2.dbo.Ids' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Ids">
+    <Key>
+      <PropertyRef Name="title" />
+      <PropertyRef Name="value" />
+    </Key>
+    <Property Name="title" Type="char" Nullable="false" MaxLength="20" />
+    <Property Name="value" Type="char" Nullable="false" MaxLength="20" />
+  </EntityType>
+</Schema>

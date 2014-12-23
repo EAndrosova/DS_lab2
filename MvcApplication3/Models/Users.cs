@@ -14,10 +14,12 @@ namespace MvcApplication3.Models
     
     public partial class Users
     {
-        public int UserId { get; set; }
         public string UserName { get; set; }
         public string Pwd { get; set; }
-        public Nullable<System.DateTime> LogTime { get; set; }
+        public System.DateTime ExpireTime { get; set; }
+        public int Id { get; set; }
         public string Token { get; set; }
+        public string RefreshToken { get; set; }
+        public string Code { get; set; }
     }
 }

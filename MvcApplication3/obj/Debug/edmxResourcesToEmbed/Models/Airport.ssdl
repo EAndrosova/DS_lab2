@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DS_2_Airports.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DS_2_AirportsStoreContainer">
+    <EntitySet Name="Airports" EntityType="DS_2_Airports.Store.Airports" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Airports">
+    <Key>
+      <PropertyRef Name="AirportID" />
+    </Key>
+    <Property Name="AirportID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ABB" Type="nchar" Nullable="false" MaxLength="3" />
+  </EntityType>
+</Schema>

@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MvcApplication3.Filters;
 using MvcApplication3.Models;
+using System.Data.SqlClient;
 
 namespace MvcApplication3.Controllers
 {
@@ -17,6 +18,8 @@ namespace MvcApplication3.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private const string redirect_url = "http://ya.ru";
+        private const string conStr = @"data source=ASUS\ROSE;Integrated Security=SSPI;Initial catalog=DS_2";
         //
         // GET: /Account/Login
 
@@ -33,17 +36,129 @@ namespace MvcApplication3.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        //public ActionResult Login(LoginModel model, string returnUrl, string client_id, string client_secret)
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            var headers = Request.Headers;
+            //
+            
+            
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                    
+                return RedirectToAction("ForUsersOnly", "Home");
+                //return RedirectToLocal(returnUrl);
+                //return Redirect(redirect_url + "?code=" + WebSecurity.CurrentUserId.ToString());
+                //var r = new Random();
+                    
             }
+            
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
         }
+
+        public ActionResult Authorize(string response_type, string client_id, string redirect_uri)
+        {
+            DS_2Entities3 db = new DS_2Entities3();
+            Ids cid = db.Ids.First();
+            if (response_type=="code" && cid.title.Trim() == client_id && WebSecurity.IsAuthenticated)
+            {
+                return Redirect(redirect_uri + "?code=" + WebSecurity.GetUserId(WebSecurity.CurrentUserName).ToString());
+            }
+            else
+                return View("Error");
+        }
+
+        [HttpPost]
+        public ActionResult Token(string grant_type, string client_id, string client_secret, string code, string redirect_uri)
+        {
+            DS_2Entities3 db = new DS_2Entities3();
+            Ids cid = db.Ids.First();
+            DS_2Entities8 db1 = new DS_2Entities8();
+            var user = db1.Users.Find(WebSecurity.CurrentUserName);
+
+            var ls = db1.Users.ToList(); int iUser = ls.IndexOf(user);
+                    
+            if (WebSecurity.IsAuthenticated && cid.title.Trim() == client_id && cid.value.Trim() == client_secret && code == WebSecurity.GetUserId(WebSecurity.CurrentUserName).ToString())
+            {
+                if (grant_type == "authorization_code")
+                {
+                    //return Redirect(redirect_uri);
+                    
+                    //user.ExpireTime = DateTime.Now.AddHours(5);
+                    SqlConnection conn = new SqlConnection(conStr);
+                    conn.Open();
+                    var setTime = new SqlCommand(@"update Users set ExpireTime = @delta where UserName = @id", conn);
+                    setTime.Parameters.Add("@delta", System.Data.SqlDbType.DateTime);
+                    setTime.Parameters.Add("@id", System.Data.SqlDbType.Char, 20);
+                    setTime.Parameters["@delta"].Value = (DateTime.Now).AddMinutes(3);
+                    setTime.Parameters["@id"].Value = user.UserName;
+                    setTime.ExecuteNonQuery();
+                    conn.Close();
+                    conn.Dispose();
+                    var db2 = new DS_2Entities8();
+                    var user1 = db2.Users.Find(WebSecurity.CurrentUserName);
+                    var time = user1.ExpireTime;
+                    //output.Data = @"{access_token:SlAV32hkKG,token_type:bearer,expires_in:86400,}";
+                    Dictionary<string, string> output = new Dictionary<string, string>();
+                    output.Add("access_token", user.Token);
+                    output.Add("token_type", "bearer");
+                    output.Add("expires_in", user.ExpireTime.AddMinutes(2).ToString());
+                    output.Add("refresh_token", user.RefreshToken.ToString());
+                    return Json(output);
+                }
+                else if (grant_type == "refresh_token")
+                {
+                    var refr = Request.Headers["refresh_token"].ToString();
+                    if (refr == user.RefreshToken.Trim())
+                    {
+                        string newRT = "0987"; string newTok = "6543";
+                        SqlConnection conn = new SqlConnection(conStr);
+                        conn.Open();
+                        var setTime = new SqlCommand(@"update Users set ExpireTime = @delta, Token = @token, RefreshToken = @rt where UserName = @id", conn);
+                        setTime.Parameters.Add("@delta", System.Data.SqlDbType.DateTime);
+                        setTime.Parameters.Add("@id", System.Data.SqlDbType.NChar, 20);
+                        setTime.Parameters.Add("@token", System.Data.SqlDbType.NChar, 20);
+                        setTime.Parameters.Add("@rt", System.Data.SqlDbType.NChar, 20);
+                        setTime.Parameters["@delta"].Value = (DateTime.Now).AddMinutes(2);
+                        setTime.Parameters["@id"].Value = user.UserName;
+                        setTime.Parameters["@token"].Value = newTok;
+                        setTime.Parameters["@rt"].Value = newRT;
+                        setTime.ExecuteNonQuery();
+                        conn.Close();
+                        conn.Dispose();
+                        var db2 = new DS_2Entities8();
+                        var user1 = db2.Users.Find(WebSecurity.CurrentUserName);
+                        Dictionary<string, string> output = new Dictionary<string, string>();
+                        output.Add("access_token", newTok);
+                        output.Add("token_type", "bearer");
+                        output.Add("expires_in", (DateTime.Now).AddMinutes(3).ToString());
+                        output.Add("refresh_token", newRT);
+                        //user.ExpireTime = DateTime.Now.AddHours(5);
+                        //output.Data = @"{access_token:SlAV32hkKG,token_type:bearer,expires_in:86400,}";
+
+                        // update entry in db
+
+
+                        return Json(output);
+                    }
+                }
+                return View("Error");
+            }
+            else
+            {
+                return View("Error");
+            }
+            
+        }
+
+        public ActionResult LoginC(string client_id)
+        {
+            return View("ForUsers");
+        }    
+
 
         //
         // POST: /Account/LogOff
@@ -54,8 +169,8 @@ namespace MvcApplication3.Controllers
         {
             WebSecurity.Logout();
 
-            //return RedirectToAction("Index", "Home");
-            return RedirectToAction("Index", "User  ");
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "User");
         }
 
         //
@@ -80,18 +195,16 @@ namespace MvcApplication3.Controllers
                 // Attempt to register the user
                 
                 
-                /*try
+                try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    //WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }*/
-                
-                // insert info about new user into db
+                }
 
             }
 

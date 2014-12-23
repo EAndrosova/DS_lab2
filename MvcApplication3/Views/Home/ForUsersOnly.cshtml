@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "ForUsersOnly";
+}
+
+<h2>ForUsersOnly</h2>
+@if (WebSecurity.IsAuthenticated)
+{
+    @Html.ActionLink("View Flights", "Index", "Flight");
+    @Html.ActionLink("View Airports", "Index", "Airport");
+}
+else
+{
+    <p>Sorry, you are not authentificated!</p>   
+}
